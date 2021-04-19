@@ -10,7 +10,7 @@ TOKEN = 1234 #Unique ID of the user
 
 @app.route('/', methods=['GET'])
 def home():
-    return render_template('index.html')
+    return render_template('readME.md')
 
 #List of all available softwares
 @app.route(f'/student', methods=["GET"])
@@ -101,4 +101,4 @@ def after_request(response):
 
 if __name__ == "__main__":
     create_tables()
-    app.run(host='0.0.0.0', port=9000)
+    app.run()

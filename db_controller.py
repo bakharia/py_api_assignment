@@ -9,6 +9,21 @@ def insert_eq(name, status, request):
     db.commit()
     return True
 
+def search_student(name):
+    db = get_db()
+    cursor = db.cursor()
+    like = f'%{name}%'
+    statement = "SELECT ID, NAME FROM EQUIPMENTS WHERE NAME LIKE ? AND REQUEST IS NULL"
+    cursor.execute(statement, [like]) 
+    return cursor.fetchall()
+
+def search_manager(name):
+    db = get_db()
+    cursor = db.cursor()
+    like = f'%{name}%'
+    statement = "SELECT * FROM EQUIPMENTS WHERE NAME LIKE ? "
+    cursor.execute(statement, [like]) 
+    return cursor.fetchall()
 
 def update_eq_student(id, status, request):
     db = get_db()

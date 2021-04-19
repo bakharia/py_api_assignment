@@ -25,12 +25,28 @@ def get_eq_manager():
         eq = db_controller.get_eq_manager()
         return jsonify(eq)
 
+#Searching softwares
+@app.route(f'/student/search/<name>', methods=["GET"])
+def search_student(name):
+    if int(request.args['key']) == TOKEN:
+        eq = db_controller.search_student(name)
+        return jsonify(eq)
+    return 'Invalid Token'
+
+@app.route(f'/manager/search/<name>', methods=["GET"])
+def search_manager(name):
+    if int(request.args['key']) == TOKEN:
+        eq = db_controller.search_manager(name)
+        return jsonify(eq)
+    return 'Invalid Token'
+
 #Inserting values
-@app.route(f"/manager/<name>", methods=["GET"])
+@app.route(f"/manager/insert/<name>", methods=["GET"])
 def insert_eq(name):
     if int(request.args['key']) == TOKEN:
         result = db_controller.insert_eq(name, "Available", None)
         return jsonify(result)
+    return 'Invalid Token'
 
 #Student requesting
 @app.route(f"/student/request/<id>", methods=["GET"])
@@ -38,8 +54,8 @@ def update_eq_student_request(id):
     print(request.args )
     if int(request.args['key']) == TOKEN:
         #print(request.args['id'])
-        eq = db_controller.get_by_id(id)
-        if eq[3] == None:
+        eq = db_controller.get_by_id(int(id))
+        if eq[2] == None:
             status = "Requested"
             req = f"{TOKEN}"
             result = db_controller.update_eq_student(id, status, req)
@@ -47,6 +63,7 @@ def update_eq_student_request(id):
             return result
         else:
             return 'Not available'
+    return 'Invalid Token'
 
 #Student returning
 @app.route(f"/student/return/<id>", methods=["GET"])
@@ -74,6 +91,7 @@ def update_eq_manager(id):
             return 'Not requested'
         result = db_controller.update_eq_manager(int(id), "Issued", f"{TOKEN}")
         return jsonify(db_controller.get_by_id(id))
+    return 'Invalid Token'
 
 #Deleting values
 @app.route(f"/delete/<id>", methods=["GET"])
@@ -81,6 +99,7 @@ def delete_eq(id):
     if int(request.args['key']) == TOKEN:
         result = db_controller.delete_eq(int(id))
         return jsonify(result)
+    return 'Invalid Token'
 
 #Get values by ID
 @app.route(f"/<id>", methods=["GET"])
@@ -88,6 +107,7 @@ def get_eq_by_id(id):
     if int(request.args['key']) == TOKEN:
         eq = db_controller.get_by_id(int(id))
         return jsonify(eq)
+    return 'Invalid Token'
 
 
 @app.after_request

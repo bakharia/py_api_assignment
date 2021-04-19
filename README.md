@@ -29,10 +29,13 @@ For viewing all the equipments available to the manager [id, name, status, reque
 ```curl
 curl -i http://127.0.0.1:5000/manager?key=<enter_key>
 ```
+
 For inserting new equipment as a manager
+
 ```curl
 curl -i http://127.0.0.1:5000/manager/<name_of_the_equipment>?key=<enter_key>
 ```
+
 Similarly, for approving requests (changes status to issued) and deleting values
 ```curl
 curl -i http://127.0.0.1:5000/manager/request/<id>?key=<enter_key>

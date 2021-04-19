@@ -12,6 +12,13 @@ pip install flask
 The sqlite3 is available by default in python 2.5.x version and above.
 
 ## Usage
+To run the api run the following after clowning
+
+```python
+python app.py
+```
+
+
 Key is set as 1234 for the moment. The data contains 4 files [id, name, status, request_id]
 
 For viewing all the equipments available to the student [id,name]
